@@ -1,0 +1,13 @@
+services:
+  dns:
+    build: ./dns
+    container_name: meu-dns-container
+    ports:
+      - "53:53/udp"
+
+  web:
+    build: ./web
+    container_name: meu-web-container
+    ports:
+      - "8080:80"
+
