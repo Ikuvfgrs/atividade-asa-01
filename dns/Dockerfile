@@ -1,15 +1,10 @@
-FROM ubuntu:latest
+FROM nginx:alpine
 
+# Copiar todos os arquivos da pasta 'web' para dentro do diretório do Nginx
+COPY web/ /usr/share/nginx/html/
 
-RUN apt update && apt install -y bind9 dnsutils
+EXPOSE 80
 
+# Comando para rodar o Nginx em primeiro plano
+CMD ["nginx", "-g", "daemon off;"]
 
-COPY named.conf.local /etc/bind/named.conf.local
-COPY db.asa.br /etc/bind/db.asa.br
-
-
-EXPOSE 53/tcp
-EXPOSE 53/udp
-
-
-CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf", "-u", "bind"]
